@@ -44,17 +44,23 @@ class RedeemPointsPage extends StatelessWidget {
                       }
                       // Add else if or switch statements here for other cards if needed
                     },
-                    child: Card(
-                      color: Colors.white, // Dark card color for contrast
+                    child: Container(
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage('lib/assets/images/${cardTitles[index].toLowerCase()}.jpg'),
+                          fit: BoxFit.cover, // Cover the entire card area
+                        ),
+                      ),
                       child: Center(
                         child: Text(
                           cardTitles[index],
-                          style: TextStyle(color: Colors.black, fontSize: 24),
+                          style: TextStyle(color: Colors.white, fontSize: 24),
                         ),
                       ),
                     ),
                   );
                 },
+
               ),
             ),
           ],

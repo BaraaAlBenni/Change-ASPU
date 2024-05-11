@@ -1,24 +1,25 @@
-// lib/services/api_service.dart
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class ApiService {
-  final String baseUrl = 'http://10.0.2.2:80'; // Adjust for your server
+  final String _baseUrl = 'https://baa0-190-2-153-226.ngrok-free.app/api/';
 
-  Future<bool> registerUser(Map<String, dynamic> userData) async {
-    Uri url = Uri.parse('$baseUrl/register.php');
-    final response = await http.post(
-      url,
-      headers: <String, String>{
-        'Content-Type': 'application/json',
-      },
-      body: jsonEncode(userData),
-    );
-
-    if (response.statusCode == 200) {
-      return true; // Registration successful
-    } else {
-      throw Exception('Failed to register user.');
+  Future<bool> register(Map<String, dynamic> userData) async {
+    try {
+      var response = await http.post(
+        Uri.parse(_baseUrl + 'register'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode(userData),
+      );
+      print(response.body);
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        // Assuming the server returns 200 or 201 on successful registration
+        return true;
+      }
+    } catch (e) {
+      // Handle any errors here
+      print(e.toString());
     }
+    return false;
   }
 }

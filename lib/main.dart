@@ -101,7 +101,7 @@ class MyApp extends StatelessWidget {
               Text(
                 boldText,
                 style: TextStyle(
-                  fontSize: 45,
+                  fontSize: 42,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),

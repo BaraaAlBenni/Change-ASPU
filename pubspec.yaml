@@ -32,8 +32,9 @@ dependencies:
     sdk: flutter
   get: ^4.6.6
   http: ^1.2.1
-
-
+  flutter_secure_storage: ^9.0.0
+  shared_preferences: ^2.2.3
+  geolocator: ^11.0.0
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
@@ -42,9 +43,10 @@ dev_dependencies:
   flutter_launcher_icons: "^0.13.1"
 
 flutter_icons:
-  android: "launcher_icon"
-  ios: true
+  android: true
+  ios: false
   image_path: "lib/assets/images/logo.jpg"
+
 
 
 
@@ -75,6 +77,22 @@ flutter:
     - lib/assets/images/first.jpg
     - lib/assets/images/landClean.jpg
     - lib/assets/images/logo.jpg
+    - lib/assets/images/homepaint.jpg
+    - lib/assets/images/landClean.jpg
+    - lib/assets/images/teaching.jpg
+    - lib/assets/images/awarness.jpg
+    - lib/assets/images/community.jpg
+    - lib/assets/images/helping.jpg
+    - lib/assets/images/landcleaning.jpg
+    - lib/assets/images/events.jpg
+    - lib/assets/images/clothing.jpg
+    - lib/assets/images/coupon.jpg
+    - lib/assets/images/other.jpg
+    - lib/assets/images/food.jpg
+    - lib/assets/images/bread.jpg
+    - lib/assets/images/milk.jpg
+    - lib/assets/images/meat.jpg
+    - lib/assets/images/olive oil.jpg
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

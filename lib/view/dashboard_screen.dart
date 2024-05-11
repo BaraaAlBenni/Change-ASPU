@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:projecthalf/view/CurrentProjectsDisplayScreen.dart';
 import 'package:projecthalf/view/profile_screen.dart';
-import 'SearchScreen/SearchScreen.dart';
+import 'package:projecthalf/view/FavoriteScreen.dart';
+import 'package:projecthalf/view/SearchScreen/SearchScreen.dart';
 
 class DashboardScreen extends StatefulWidget {
   final String username;
@@ -16,114 +17,94 @@ class DashboardScreen extends StatefulWidget {
 class _DashboardScreenState extends State<DashboardScreen> {
   int _selectedIndex = 0; // To track the active tab
 
-  // Define a list of colors for the dashboard boxes
   final List<Color> boxColors = [
-    Colors.blueAccent, // For "Project finished"
-    Colors.black, // For "Hours spent"
-    Colors.black, // For "Hours spent"
-    Colors.white, // For "Projects"
+    Colors.blueAccent,
+    Colors.black,
+    Colors.black,
+    Colors.white,
   ];
 
-  // Custom text for each dashboard
   final List<String> dashboardTexts = [
     'Project finished',
     'Hours spent',
     'Current Projects',
     'Projects',
   ];
-  // Custom text for each dashboard box
-  final List<String> dashboardTitles = [
-    'Land Cleaning',
-    'Home Paint',
-    'English Teaching',
-    'Helping the elderly',
-  ];
-  // Custom text style for the last dashboard
+
   final TextStyle lastDashboardTextStyle = TextStyle(
-    fontSize: 16,
+    fontSize: 17,
     fontWeight: FontWeight.bold,
     color: Colors.black,
     decoration: TextDecoration.underline,
     decorationColor: Colors.blue,
-    decorationThickness: 3,
+    decorationThickness: 4,
   );
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      // Set the background color of the entire screen
-      body: Scrollbar( // Wrap with Scrollbar
-        thumbVisibility: true, // Show scrollbar thumb
-        child: SingleChildScrollView( // Allows for vertical scrolling
+      body: Scrollbar(
+        thumbVisibility: true,
+        child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(25.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text('Hello @${widget.username}', style: TextStyle(fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white)),
-                SizedBox(height: 20),
-                Text('My Effect', style: TextStyle(fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white)),
-                SizedBox(height: 40),
-                // Note: Removed Expanded widget here, as it conflicts with SingleChildScrollView
-            Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: GridView.builder(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: 4,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2, // Number of columns
-                  crossAxisSpacing: 10.0, // Horizontal space between items
-                  mainAxisSpacing: 10.0, // Vertical space between items
-                  childAspectRatio: 2/ 2, // Adjust the size of the boxes
+                Padding(
+                  padding: const EdgeInsets.all(30.0),
+                  child: Text('Hello @${widget.username}', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white)),
                 ),
-                // Inside the GridView.builder of DashboardScreen.dart
-                itemBuilder: (context, index) {
-                  bool isHoursSpentDashboard = index == 1 || index == 2;
-                  return GestureDetector(
-                    onTap: () {
-                      if (index == 2) {  // Assuming index 2 is "Current Projects"
-                        Get.to(() => CurrentProjectsDisplayScreen());  // Using GetX to navigate
-                      }
-                    },
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Container(
-                          padding: EdgeInsets.all(26),
-                          decoration: BoxDecoration(
-                            color: boxColors[index % boxColors.length],
-                            borderRadius: BorderRadius.circular(20),
-                            border: isHoursSpentDashboard ? Border.all(color: Colors.white, width: 1) : null,
-                          ),
-                          child: Center(
-                            child: Text(
-                              dashboardTexts[index],
-                              style: index == 3 ? lastDashboardTextStyle : TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
-                            ),
-                          ),
-                        ),
-                        if (index == 2) // Only for "Current Projects"
-                          Padding(
-                            padding: const EdgeInsets.only(top: 25.0),
-                            child: Text(
-                              "Open opportunities",
-                              style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold, color: Colors.white),
-                            ),
-                          ),
-                      ],
+                SizedBox(height: 3),
+                Padding(
+                  padding: const EdgeInsets.all(9.0),
+                  child: Text('My Effect', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white)),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(1.0),
+                  child: GridView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: 4,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 5.0,
+                      mainAxisSpacing: 10.0,
+                      childAspectRatio: 3 / 2,
                     ),
-                  );
-                },
-
-              ),
-            ),
-
+                    itemBuilder: (context, index) {
+                      return GestureDetector(
+                        onTap: () {
+                          if (index == 2) {
+                            Get.to(() => CurrentProjectsDisplayScreen());
+                          } else if (index == 3) {
+                            Get.to(() => SearchScreen());
+                          }
+                        },
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Container(
+                              padding: EdgeInsets.all(20),
+                              decoration: BoxDecoration(
+                                color: boxColors[index % boxColors.length],
+                                borderRadius: BorderRadius.circular(20),
+                                border: Border.all(color: Colors.white, width: 2),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  dashboardTexts[index],
+                                  style: index == 3 ? lastDashboardTextStyle : TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                ),
               ],
             ),
           ),
@@ -132,36 +113,31 @@ class _DashboardScreenState extends State<DashboardScreen> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Like'),
+          BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Favorite'),
           BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.red,
-        backgroundColor: Colors.black12, // Set the background color to black
-        unselectedItemColor: Colors.black, // Optional: Change the color of unselected items if needed
+        backgroundColor: Colors.black12,
+        unselectedItemColor: Colors.black,
         onTap: (index) {
           setState(() {
             _selectedIndex = index;
           });
           switch (index) {
-            case 2: // Search screen
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => SearchScreen()),
-              );
+            case 1: // Navigate to Favorite Screen
+              Get.to(() => FavoriteScreen());
               break;
-            case 3: // Profile screen
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => ProfileScreen()),
-              );
+            case 2: // Navigate to Search Screen
+              Get.to(() => SearchScreen());
               break;
-          // Handle other indices if necessary
+            case 3: // Navigate to Profile Screen
+              Get.to(() => ProfileScreen());
+              break;
           }
         },
       ),
-
     );
   }
 }

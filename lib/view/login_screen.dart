@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'dart:ui'; // For ImageFilter
 import 'package:get/get.dart';
-import 'dashboard_screen.dart'; // Import DashboardScreen
-import 'registration_screen.dart'; // Ensure this import is correct
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:http/http.dart' as http;
+import 'package:projecthalf/view/registration_screen.dart';
+import 'dart:convert';
+import 'dashboard_screen.dart';
+import 'package:projecthalf/controller/login_controller.dart'; // Import the LoginController
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -10,92 +13,60 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  bool _rememberMe = false;
+  final loginController = Get.put(LoginController()); // Create an instance of LoginController
+
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: NetworkImage("https://img.freepik.com/premium-vector/network-connection-background-abstract-style_23-2148875738.jpg"),
-                fit: BoxFit.cover,
-              ),
-            ),
+      backgroundColor: Colors.black, // Set background color to black
+      body: Center(
+        child: Container(
+          width: MediaQuery.of(context).size.width * 0.9,
+          height: MediaQuery.of(context).size.height * 0.6,
+          decoration: BoxDecoration(
+            color: Colors.white.withOpacity(1.0),
+            borderRadius: BorderRadius.circular(10),
           ),
-          Center(
-            child: ClipRect(
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
-                child: Container(
-                  width: MediaQuery.of(context).size.width * 0.8,
-                  height: MediaQuery.of(context).size.height * 0.6, // Adjusted height
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                        child: TextField(
-                          decoration: InputDecoration(labelText: 'Email'),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                        child: TextField(
-                          obscureText: true,
-                          decoration: InputDecoration(labelText: 'Password'),
-                        ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Checkbox(
-                                value: _rememberMe,
-                                onChanged: (bool? value) {
-                                  setState(() {
-                                    _rememberMe = value!;
-                                  });
-                                },
-                              ),
-                              Text('Remember me', style: TextStyle(color: Colors.white)),
-                            ],
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              // Handle "Forgot Password" tap
-                            },
-                            child: Text('Forgot Password?', style: TextStyle(color: Colors.white)),
-                          ),
-                        ],
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          Get.to(() => DashboardScreen(username: 'karam')); // Navigate to DashboardScreen
-                        },
-                        child: Text('Log In'),
-                      ),
-                      SizedBox(height: 20), // Spacing
-                      TextButton(
-                        onPressed: () {
-                          Get.to(() => RegistrationScreen()); // Correctly navigate to RegistrationScreen
-                        },
-                        child: Text("Don't have an Account? Register now", style: TextStyle(color: Colors.white)),
-                      ),
-                    ],
-                  ),
-                ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextField(
+                controller: emailController,
+                decoration: InputDecoration(labelText: 'Email'),
               ),
-            ),
+              TextField(
+                controller: passwordController,
+                obscureText: true,
+                decoration: InputDecoration(labelText: 'Password'),
+              ),
+              Obx(() => CheckboxListTile(
+                title: Text('Remember me', style: TextStyle(color: Colors.white)),
+                value: loginController.rememberMe.value,
+                onChanged: loginController.toggleRememberMe,
+                controlAffinity: ListTileControlAffinity.leading,
+              )),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Don't have an Account? ", style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold)),
+                  GestureDetector(
+                    onTap: () => Get.to(() => RegistrationScreen()),
+                    child: Text('Sign up now!!', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue)),
+                  ),
+                ],
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  loginController.login(emailController.text, passwordController.text);
+                },
+                child: Obx(() => loginController.isLoading.value ? CircularProgressIndicator() : Text('Log In')), // Observe isLoading from the controller
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

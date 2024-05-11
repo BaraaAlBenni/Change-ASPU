@@ -1,31 +1,63 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:projecthalf/view/land_cleaning_page.dart';
+import 'package:projecthalf/view/FilterScreen.dart';
 
-class SearchScreen extends StatelessWidget {
+class SearchScreen extends StatefulWidget {
+  @override
+  _SearchScreenState createState() => _SearchScreenState();
+}
+
+class _SearchScreenState extends State<SearchScreen> {
   // Titles for each dashboard box
   final List<String> dashboardTitles = [
-    'Land Cleaning',
-    'Home Paint',
-    'English Teaching',
-    'Helping the Elderly',
-    'Community Service',
-    'Public Awareness',
-    'Environmental Care',
-    'Cultural Events',
+    'Land Cleaning', 'Home Paint', 'English Teaching', 'Helping the Elderly',
+    'Community Service', 'Public Awareness', 'Environmental Care', 'Cultural Events',
   ];
 
   // City names for each dashboard box
   final List<String> cityNames = [
-    'Damascus',
-    'Aleppo',
-    'Hama',
-    'Daraa',
-    'Sweida',
-    'Latakia',
-    'Tartus',
-    'Homs',
+    'Damascus', 'Aleppo', 'Hama', 'Daraa', 'Sweida', 'Latakia', 'Tartus', 'Homs',
   ];
+  void applyFilters(Map<String, dynamic> filters) {
+    List<String> cityFilters = filters['cityFilters'];
+    String nameFilter = filters['nameFilter'].toString().toLowerCase();
+
+    setState(() {
+      filteredIndexes.clear();
+      for (int i = 0; i < cityNames.length; i++) {
+        if (cityFilters.contains(cityNames[i]) && dashboardTitles[i].toLowerCase().contains(nameFilter)) {
+          filteredIndexes.add(i);
+        }
+      }
+    });
+  }
+  // Background images for each dashboard box
+  final List<String> backgroundImages = [
+    'lib/assets/images/landClean.jpg',
+    'lib/assets/images/homepaint.jpg',
+    'lib/assets/images/teaching.jpg',
+    'lib/assets/images/helping.jpg',
+    'lib/assets/images/community.jpg',
+    'lib/assets/images/awarness.jpg',
+    'lib/assets/images/landcleaning.jpg',
+    'lib/assets/images/events.jpg',
+  ];
+
+  // Descriptions for each dashboard box
+  final List<String> descriptions = [
+    "Join us for a day of land cleaning and environmental stewardship! Help restore and preserve our local natural spaces.",
+    "Let's paint the town together! Join our community painting event and add color to your neighborhood.",
+    "Become an English tutor and make a difference in someone's life. Help others learn a new language and expand their opportunities.",
+    "Join us in assisting the elderly members of our community. From running errands to providing companionship, your support makes a difference.",
+    "Serve your community by participating in various service projects. From food drives to park clean-ups, there's something for everyone.",
+    "Raise awareness about important issues facing our society. Join our campaigns and advocate for positive change.",
+    "Protect the environment through our environmental care initiatives. Plant trees, clean up waterways, and more!",
+    "Experience the rich culture of our community through events and celebrations. Join us in preserving and sharing our traditions.",
+  ];
+
+  // This will hold the filtered data
+  List<int> filteredIndexes = [];
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +66,7 @@ class SearchScreen extends StatelessWidget {
         title: TextField(
           decoration: InputDecoration(
             hintText: 'Search...',
-            fillColor: Colors.white70, // Lighter grey color for the search bar
+            fillColor: Colors.white70,
             filled: true,
             contentPadding: EdgeInsets.all(0),
             prefixIcon: Icon(Icons.search, color: Colors.grey),
@@ -45,21 +77,24 @@ class SearchScreen extends StatelessWidget {
             isDense: true,
           ),
         ),
-        backgroundColor: Colors.grey[850], // Dark grey color for the app bar
+        backgroundColor: Colors.grey[850],
         actions: [
           IconButton(
-            icon: Icon(Icons.filter_alt_outlined),
-            onPressed: () {
-              // Place your filter logic here
+            icon: Icon(Icons.filter_alt_outlined, color: Colors.white),
+            onPressed: () async {
+              var filters = await Get.to(() => FilterScreen());
+              if (filters != null) {
+                applyFilters(filters);
+              }
             },
           ),
         ],
       ),
-      backgroundColor: Colors.black38, // Set the background color for the screen
+      backgroundColor: Colors.black38,
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: GridView.builder(
-          itemCount: dashboardTitles.length,
+          itemCount: filteredIndexes.isNotEmpty ? filteredIndexes.length : dashboardTitles.length,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             crossAxisSpacing: 10,
@@ -67,12 +102,23 @@ class SearchScreen extends StatelessWidget {
             childAspectRatio: 2 / 2,
           ),
           itemBuilder: (BuildContext context, int index) {
-            bool isLandCleaning = dashboardTitles[index] == "Land Cleaning";
+            final idx = filteredIndexes.isNotEmpty ? filteredIndexes[index] : index;
+            final isLandCleaning = dashboardTitles[idx] == "Land Cleaning";
 
             return GestureDetector(
               onTap: () {
-                // Navigate to details page, you might want to pass specific details based on the card tapped
-                Get.to(() => LandCleaningDetailsScreen(title: dashboardTitles[index], city: cityNames[index]));
+                // Navigate to LandCleaningDetailsScreen on tap
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => LandCleaningDetailsScreen(
+                      title: dashboardTitles[idx],
+                      city: cityNames[idx],
+                      imageUrl: backgroundImages[idx],
+                      description: descriptions[idx],
+                    ),
+                  ),
+                );
               },
               child: Card(
                 color: Colors.grey[100],
@@ -83,29 +129,28 @@ class SearchScreen extends StatelessWidget {
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    image: isLandCleaning ? DecorationImage(
-                      image: NetworkImage("https://media.istockphoto.com/id/1193475383/nl/vector/mensen-die-een-stadspark-samen-schoonmaken-en-afval-inzamelen.jpg?s=612x612&w=0&k=20&c=JNA6IIVMJ0oBzf6QhNzmBQRebY2I3lgGVEiiRp2FJ84="),
+                    image: DecorationImage(
+                      image: AssetImage(backgroundImages[idx]), // Use AssetImage
                       fit: BoxFit.cover,
-                    ) : null,
+                    ),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        if (!isLandCleaning) // Show text only if it's not the Land Cleaning card
-                          Text(
-                            dashboardTitles[index],
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        SizedBox(height: 6), // Space between the texts
                         Text(
-                          cityNames[index],
+                          dashboardTitles[idx],
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: 6),
+                        Text(
+                          cityNames[idx],
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: isLandCleaning ? Colors.black : Colors.grey[800],
@@ -121,9 +166,7 @@ class SearchScreen extends StatelessWidget {
             );
           },
         ),
-
       ),
-
     );
   }
 }
