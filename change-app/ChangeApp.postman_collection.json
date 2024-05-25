@@ -1,0 +1,1871 @@
+{
+	"info": {
+		"_postman_id": "1a86e889-a3c9-4b3c-a57d-4295ebd0fda8",
+		"name": "ChangeApp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34243581"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "log_in",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "sdfhfffggg@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456789",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "127.0.0.1:8000/api/login",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "majd",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "sdfhfffggggg@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456789",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "127.0.0.1:8000/api/register",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"register"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "log_out",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "4|nUlfnWHxqIkqhRkt78sakXXYJmSalzqXd3tio3UT2a350476",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "Accept",
+									"value": "application/json",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "127.0.0.1:8000/api/logout",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "category",
+			"item": [
+				{
+					"name": "store_category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "c7L2qNQ4fliFKWFGCPSSGI3a4cpZAXzfEVBHc0l9542b5b03",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:8000/api/admin/category_store?name=study&discription=llllllllllllllllllllll",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"admin",
+								"category_store"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "study"
+								},
+								{
+									"key": "discription",
+									"value": "llllllllllllllllllllll"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "category_delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/category_delete/2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"category_delete",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "dispplay_category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "2|IX9802T6Lsc5kBNw9axgTiSrQPlFsO2UN4pNUEO5a19264dd",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/categories_display",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"categories_display"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_category",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/category/1?name=life&discription=hhhhhhhhhhhhhhhhhhhhhhh",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"category",
+								"1"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "life"
+								},
+								{
+									"key": "discription",
+									"value": "hhhhhhhhhhhhhhhhhhhhhhh"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "volunteer",
+			"item": [
+				{
+					"name": "Volunteer_store",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Gdfbe0mKlIwOMHxbXtPPJLnbJbariCEkaHMTWtSte5f69f90",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"uuid": "b3e61602-e552-474b-a213-f11486819061"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\" : \"333333333333333333\",\r\n    \"start_date\" : \"2023-07-04\",\r\n    \"end_date\" : \"2023-07-07\",\r\n    \"count_worker\" : 10,\r\n    \"category_id\" : 2,\r\n    \"point\" :10,\r\n    \"address\" :\"aleppo\" ,\r\n    \"days\":\r\n            [\r\n                \"sunday\",\r\n                \"tuesday\"\r\n            ]\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/Volunteer_store",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"Volunteer_store"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Volunteer_update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Gdfbe0mKlIwOMHxbXtPPJLnbJbariCEkaHMTWtSte5f69f90",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"uuid": "8f293df8-a22f-47e8-8918-ec351847cc6f"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\" : \"mmmmmmmmmmmmmmmmmmmmmmm\",\r\n    \"start_date\" : \"2023-07-04\",\r\n    \"end_date\" : \"2023-07-07\",\r\n    \"count_worker\" : 5,\r\n    \"category_id\" : 1,\r\n    \"point\" :150,\r\n    \"address\" :\"aleppo\" ,\r\n    \"days\":\r\n            [\r\n                \"saturday\",\r\n                \"friday\"\r\n            ]\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/Volunteer_update/5?description=majd bayer_kkkkk&start_date=2023-07-04&end_date=2024-07-09&point=49&count_worker=20&category_id=1&address=Aleppo",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"Volunteer_update",
+								"5"
+							],
+							"query": [
+								{
+									"key": "description",
+									"value": "majd bayer_kkkkk"
+								},
+								{
+									"key": "start_date",
+									"value": "2023-07-04"
+								},
+								{
+									"key": "end_date",
+									"value": "2024-07-09"
+								},
+								{
+									"key": "point",
+									"value": "49"
+								},
+								{
+									"key": "count_worker",
+									"value": "20"
+								},
+								{
+									"key": "category_id",
+									"value": "1"
+								},
+								{
+									"key": "address",
+									"value": "Aleppo"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Volunteer_delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "WvlEmUni96D49SdEWHzwuLEmSOumdMXIglrT5wZpcaaaf1c5",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/Volunteer_delete/2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"Volunteer_delete",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Volunteer_display",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "pBWSboCqzuycanPVoRCgFcWFdzr5FMuJDsRTrVYU5c50260f",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/Volunteer_display",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"Volunteer_display"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "volunteer-works/search",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "WvlEmUni96D49SdEWHzwuLEmSOumdMXIglrT5wZpcaaaf1c5",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"uuid": "cd588d98-0782-41f0-a20c-2da8e3158bf5"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/volunteer-works/search?status=pending",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"volunteer-works",
+								"search"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "pending"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "volunteer_worker",
+			"item": [
+				{
+					"name": "Volunteer_store_worker",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "2Dd40Dyhw1hd3ti7NIFPmpTcRudbh7N4CbpWNH1j1fc17a95",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/Volunteer_store_worker?volunteer_work_id=1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"Volunteer_store_worker"
+							],
+							"query": [
+								{
+									"key": "volunteer_work_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "worker_count",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "2Dd40Dyhw1hd3ti7NIFPmpTcRudbh7N4CbpWNH1j1fc17a95",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/current_worker_count/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"current_worker_count",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "profile",
+			"item": [
+				{
+					"name": "Profile_recipient_work",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "2|IX9802T6Lsc5kBNw9axgTiSrQPlFsO2UN4pNUEO5a19264dd",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/Profile_recipient_work",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"Profile_recipient_work"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Profile_created_work",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "D9HdYp5tyJ4Xqa7LOf827ULGd6HcMUWccTCUJdnq92d44c1e",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/Profile_created_work",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"Profile_created_work"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "favourit_work",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "2|IX9802T6Lsc5kBNw9axgTiSrQPlFsO2UN4pNUEO5a19264dd",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/Profile_favourite_work",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"Profile_favourite_work"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "stor_info",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "2|IX9802T6Lsc5kBNw9axgTiSrQPlFsO2UN4pNUEO5a19264dd",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"uuid": "0132dc61-f640-4aa8-8896-cd06d9c143c3"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"phone\" : \"0935027218\",\r\n    \"address\" :\"aleppo\" ,\r\n    \"days\":\r\n            [\r\n                \"sunday\",\r\n                \"tuesday\",\r\n                \"wednesday\"\r\n            ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/info_user_store",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"info_user_store"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updat_info",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "2|IX9802T6Lsc5kBNw9axgTiSrQPlFsO2UN4pNUEO5a19264dd",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"uuid": "613b6e08-197c-4d2e-931f-e379e766a832"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"phone\" : \"0935027218\",\r\n    \"address\" :\"aleppo\" ,\r\n    \"days\":\r\n            [\r\n                \"sunday\",\r\n                \"tuesday\"\r\n                \r\n            ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/info_user_update",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"info_user_update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_info_user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "2|IX9802T6Lsc5kBNw9axgTiSrQPlFsO2UN4pNUEO5a19264dd",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/info_user_get",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"info_user_get"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "best_oppertinity",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "2|IX9802T6Lsc5kBNw9axgTiSrQPlFsO2UN4pNUEO5a19264dd",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/best_oppertinity",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"best_oppertinity"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add_Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "2|IX9802T6Lsc5kBNw9axgTiSrQPlFsO2UN4pNUEO5a19264dd",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"uuid": "bbacf3cc-041f-47ea-a5b8-c1adcf3c884c"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"category_ids\":\r\n                        [\r\n                            1,\r\n                            2\r\n                        ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/category_user_store",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"category_user_store"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "admin/volunteer-works_filtter/search",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "WvlEmUni96D49SdEWHzwuLEmSOumdMXIglrT5wZpcaaaf1c5",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"uuid": "21ce61cc-7438-4107-ad63-b2922b3911fc"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"status\":\"pending\"\r\n                \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/admin/volunteer-works_filtter/search?status=completed",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"admin",
+								"volunteer-works_filtter",
+								"search"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "completed"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "favourite",
+			"item": [
+				{
+					"name": "add_favourite",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "2|IX9802T6Lsc5kBNw9axgTiSrQPlFsO2UN4pNUEO5a19264dd",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/add_to_favourite/2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"add_to_favourite",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_favourite",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "2|cJYMOI3Eh5QfrkKVRt0DsampHSFj0LuE2WpoUGDre46d6630",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/delete_favourite/8",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"delete_favourite",
+								"8"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "admin/all_volunteer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "MiXBHTZpibK45ae9Lp0PJsBLK0wRb5x9O3FzfzcXd4c34e4b",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/admin/all_volunteer",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"admin",
+								"all_volunteer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/admin/remove_volunteer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "WvlEmUni96D49SdEWHzwuLEmSOumdMXIglrT5wZpcaaaf1c5",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/admin/remove_volunteer/2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"admin",
+								"remove_volunteer",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cange_type_user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "iwC1niR5k5YzBKw2ac38TNo2FyzIMbTHMAd7KlJV615ab5f5",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/admin/cange_type_user/1?type_user=0",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"admin",
+								"cange_type_user",
+								"1"
+							],
+							"query": [
+								{
+									"key": "type_user",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cange_status_user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "iwC1niR5k5YzBKw2ac38TNo2FyzIMbTHMAd7KlJV615ab5f5",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/admin/cange_status_user/1?status=1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"admin",
+								"cange_status_user",
+								"1"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user_infor",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "iwC1niR5k5YzBKw2ac38TNo2FyzIMbTHMAd7KlJV615ab5f5",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/admin/user_info/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"admin",
+								"user_info",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user_work_volunteer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "iwC1niR5k5YzBKw2ac38TNo2FyzIMbTHMAd7KlJV615ab5f5",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/admin/user_work_volunteer/2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"admin",
+								"user_work_volunteer",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user_work_carried_out",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "iwC1niR5k5YzBKw2ac38TNo2FyzIMbTHMAd7KlJV615ab5f5",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/admin/user_work_carried_out/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"admin",
+								"user_work_carried_out",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find_User_Email",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "iwC1niR5k5YzBKw2ac38TNo2FyzIMbTHMAd7KlJV615ab5f5",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/admin/find_User_Email?email=sdfhfffg@gmail.com",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"admin",
+								"find_User_Email"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "sdfhfffg@gmail.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add_point",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "iwC1niR5k5YzBKw2ac38TNo2FyzIMbTHMAd7KlJV615ab5f5",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/admin/Add_Point__User?user_id=1&points=200",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"admin",
+								"Add_Point__User"
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "1"
+								},
+								{
+									"key": "points",
+									"value": "200"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Decrese_Point__User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "iwC1niR5k5YzBKw2ac38TNo2FyzIMbTHMAd7KlJV615ab5f5",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/admin/Decrese_Point__User?user_id=1&points=200",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"admin",
+								"Decrese_Point__User"
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "1"
+								},
+								{
+									"key": "points",
+									"value": "200"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "dashboard",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "iwC1niR5k5YzBKw2ac38TNo2FyzIMbTHMAd7KlJV615ab5f5",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/admin/dashboard",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"admin",
+								"dashboard"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Company",
+			"item": [
+				{
+					"name": "search_fillter",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "FzUoPuvH4xdRZyWFlb1QQg30khovoo3BnocDLRWg3d847c54",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/company/volunteer-works/search?category_id=1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"company",
+								"volunteer-works",
+								"search"
+							],
+							"query": [
+								{
+									"key": "category_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_vulnteer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "FzUoPuvH4xdRZyWFlb1QQg30khovoo3BnocDLRWg3d847c54",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"uuid": "c6a0327f-b943-4c47-864f-5d481be7d676"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\" : \"mmmmmmmmmmmmmmmmmmmmmmm\",\r\n    \"start_date\" : \"2023-07-04\",\r\n    \"end_date\" : \"2023-07-07\",\r\n    \"count_worker\" : 20,\r\n    \"category_id\" : 1,\r\n    \"point\" :20,\r\n    \"address\" :\"homse\" ,\r\n    \"days\":\r\n            [\r\n                \"saturday\",\r\n                \"friday\"\r\n            ]\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/company/Volunteer_update/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"company",
+								"Volunteer_update",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Volunteer_delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "FzUoPuvH4xdRZyWFlb1QQg30khovoo3BnocDLRWg3d847c54",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/company/Volunteer_delete/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"company",
+								"Volunteer_delete",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all_volunteer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "MiXBHTZpibK45ae9Lp0PJsBLK0wRb5x9O3FzfzcXd4c34e4b",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/company/all_volunteer",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"company",
+								"all_volunteer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Volunteer_show",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "FzUoPuvH4xdRZyWFlb1QQg30khovoo3BnocDLRWg3d847c54",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/company/Volunteer_show/3",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"company",
+								"Volunteer_show",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "current_worker_count",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eRR6isG2Gv2XHjs9jraOqmvk7ZAPEd2EiiXXZyLy009bed29",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/company/current_worker_count/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"company",
+								"current_worker_count",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user_info",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "FzUoPuvH4xdRZyWFlb1QQg30khovoo3BnocDLRWg3d847c54",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/company/user_info/3",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"company",
+								"user_info",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user_work_volunteer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "FzUoPuvH4xdRZyWFlb1QQg30khovoo3BnocDLRWg3d847c54",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/company/user_work_volunteer/2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"company",
+								"user_work_volunteer",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user_work_carried_out",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "FzUoPuvH4xdRZyWFlb1QQg30khovoo3BnocDLRWg3d847c54",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/company/user_work_carried_out/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"company",
+								"user_work_carried_out",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "status_of_worker",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eRR6isG2Gv2XHjs9jraOqmvk7ZAPEd2EiiXXZyLy009bed29",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/company/status_of_worker/1?status=fineshed&user_id=3",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"company",
+								"status_of_worker",
+								"1"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "fineshed"
+								},
+								{
+									"key": "user_id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
