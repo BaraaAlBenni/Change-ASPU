@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:projecthalf/view/translations.dart';
 import 'controller/boarding_controller.dart';
-import 'view/SearchScreen/SearchScreen.dart';
-import 'package:projecthalf/view/login_screen.dart';
+import 'view/login_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,6 +14,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      translations: MyTranslations(),  // Add the translations
+      locale: Locale('en', 'US'),  // Default locale
+      fallbackLocale: Locale('en', 'US'),  // Fallback locale
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Obx(() => Stack(

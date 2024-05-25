@@ -4,6 +4,7 @@ import 'package:projecthalf/view/CurrentProjectsDisplayScreen.dart';
 import 'package:projecthalf/view/profile_screen.dart';
 import 'package:projecthalf/view/FavoriteScreen.dart';
 import 'package:projecthalf/view/SearchScreen/SearchScreen.dart';
+import 'package:projecthalf/view/newcategory.dart'; // Import the new screen
 
 class DashboardScreen extends StatefulWidget {
   final String username;
@@ -54,56 +55,70 @@ class _DashboardScreenState extends State<DashboardScreen> {
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.all(30.0),
-                  child: Text('Hello @${widget.username}', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Hello @${widget.username}',
+                        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
+                      ),
+                      Column(
+                        children: [
+                          SizedBox(height: 10), // Add space between the text and the button
+                          FloatingActionButton(
+                            onPressed: () {
+                              Get.to(() => NewCategoryScreen()); // Navigate to the new screen
+                            },
+                            child: Icon(Icons.add, size: 30, color: Colors.black,),
+                            backgroundColor: Colors.lightBlue,
+                            mini: false,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
                 SizedBox(height: 3),
                 Padding(
                   padding: const EdgeInsets.all(9.0),
                   child: Text('My Effect', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white)),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(1.0),
-                  child: GridView.builder(
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount: 4,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 5.0,
-                      mainAxisSpacing: 10.0,
-                      childAspectRatio: 3 / 2,
-                    ),
-                    itemBuilder: (context, index) {
-                      return GestureDetector(
-                        onTap: () {
-                          if (index == 2) {
-                            Get.to(() => CurrentProjectsDisplayScreen());
-                          } else if (index == 3) {
-                            Get.to(() => SearchScreen());
-                          }
-                        },
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Container(
-                              padding: EdgeInsets.all(20),
-                              decoration: BoxDecoration(
-                                color: boxColors[index % boxColors.length],
-                                borderRadius: BorderRadius.circular(20),
-                                border: Border.all(color: Colors.white, width: 2),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  dashboardTexts[index],
-                                  style: index == 3 ? lastDashboardTextStyle : TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
+                GridView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: 4,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 5.0,
+                    mainAxisSpacing: 10.0,
+                    childAspectRatio: 3 / 2,
                   ),
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      onTap: () {
+                        if (index == 2) {
+                          Get.to(() => CurrentProjectsDisplayScreen());
+                        } else if (index == 3) {
+                          Get.to(() => SearchScreen());
+                        }
+                      },
+                      child: Container(
+                        padding: EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          color: boxColors[index % boxColors.length],
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(color: Colors.white, width: 2),
+                        ),
+                        child: Center(
+                          child: Text(
+                            dashboardTexts[index],
+                            style: index == 3 ? lastDashboardTextStyle : TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ],
             ),

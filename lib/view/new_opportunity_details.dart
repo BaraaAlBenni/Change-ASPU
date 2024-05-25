@@ -1,20 +1,21 @@
 import 'dart:convert';
+import 'dart:io';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:projecthalf/view/CurrentProjectsDisplayScreen.dart';
 
-class LandCleaningDetailsScreen extends StatelessWidget {
+class NewOpportunityDetailsScreen extends StatelessWidget {
   final String title;
   final String city;
-  final String imageUrl;
+  final String imagePath;
   final String description;
 
-  LandCleaningDetailsScreen({
+  NewOpportunityDetailsScreen({
     required this.title,
     required this.city,
-    required this.imageUrl,
+    required this.imagePath,
     required this.description,
   });
 
@@ -41,7 +42,7 @@ class LandCleaningDetailsScreen extends StatelessWidget {
     final projectData = {
       'title': title,
       'city': city,
-      'imageUrl': imageUrl,
+      'imagePath': imagePath,
       'description': description,
     };
 
@@ -92,13 +93,17 @@ class LandCleaningDetailsScreen extends StatelessWidget {
     double rating = generateRandomRating();
 
     return Scaffold(
-      appBar: AppBar(title: Text(title)),
+      appBar: AppBar(
+        title: Text(title),
+        backgroundColor: Colors.black,
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Image.asset(
-              imageUrl,
+            Image.file(
+              File(imagePath),
               height: screenHeight * 0.5,
+              width: double.infinity,
               fit: BoxFit.cover,
             ),
             Padding(
@@ -151,7 +156,7 @@ class LandCleaningDetailsScreen extends StatelessWidget {
                           Map<String, dynamic> favoriteData = {
                             'title': title,
                             'city': city,
-                            'imageUrl': imageUrl,
+                            'imagePath': imagePath,
                             'description': description,
                             'rating': generateRandomRating(),
                           };
