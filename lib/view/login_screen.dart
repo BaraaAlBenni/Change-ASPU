@@ -74,12 +74,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Image.asset(
                         'lib/assets/images/logo.jpg',
                         fit: BoxFit.cover,
-                        width: 300,
-                        height: 300,
+                        width: 250,
+                        height: 250,
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  SizedBox(height: 10),
                   TextField(
                     controller: emailController,
                     decoration: InputDecoration(labelText: 'email'.tr),
