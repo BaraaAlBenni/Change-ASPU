@@ -20,6 +20,7 @@ class _NewCategoryScreenState extends State<NewCategoryScreen> {
   final TextEditingController _endDateController = TextEditingController();
   final TextEditingController _startHourController = TextEditingController();
   final TextEditingController _endHourController = TextEditingController();
+  final TextEditingController _pointsController = TextEditingController(); // Add points controller
   final ImagePicker _picker = ImagePicker();
   String? _selectedCity;
   final List<String> _cities = ['Damascus', 'Sweida', 'Aleppo', 'Homs', 'Hama', 'Lattakia', 'Tartus', 'Daraa'];
@@ -67,8 +68,8 @@ class _NewCategoryScreenState extends State<NewCategoryScreen> {
 
   Future<void> _createOpportunity() async {
     // Validate input
-    if (_selectedCity == null || _imageFile == null || _titleController.text.isEmpty) {
-      print("Please select a city, an image, and enter a title");
+    if (_selectedCity == null || _imageFile == null || _titleController.text.isEmpty || _pointsController.text.isEmpty) {
+      print("Please select a city, an image, enter a title, and points");
       return;
     }
 
@@ -85,6 +86,7 @@ class _NewCategoryScreenState extends State<NewCategoryScreen> {
       'endDate': _endDateController.text,
       'startHour': _startHourController.text,
       'endHour': _endHourController.text,
+      'points': _pointsController.text,
     };
 
     savedOpportunities.add(json.encode(newOpportunity));
@@ -162,22 +164,33 @@ class _NewCategoryScreenState extends State<NewCategoryScreen> {
               Row(
                 children: [
                   Expanded(
-                    child: Center(
-                      child: DropdownButton<String>(
-                        hint: Text("Select a city"),
-                        value: _selectedCity,
-                        items: _cities.map((String city) {
-                          return DropdownMenuItem<String>(
-                            value: city,
-                            child: Text(city),
-                          );
-                        }).toList(),
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            _selectedCity = newValue;
-                          });
-                        },
+                    flex: 3,
+                    child: DropdownButton<String>(
+                      hint: Text("Select a city"),
+                      value: _selectedCity,
+                      items: _cities.map((String city) {
+                        return DropdownMenuItem<String>(
+                          value: city,
+                          child: Text(city),
+                        );
+                      }).toList(),
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          _selectedCity = newValue;
+                        });
+                      },
+                    ),
+                  ),
+                  SizedBox(width: 20),
+                  Expanded(
+                    flex: 2,
+                    child: TextField(
+                      controller: _pointsController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Points',
                       ),
+                      keyboardType: TextInputType.number,
                     ),
                   ),
                 ],
