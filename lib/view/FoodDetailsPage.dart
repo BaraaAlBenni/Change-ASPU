@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class FoodDetailsPage extends StatelessWidget {
+class FoodDetailsPage extends StatefulWidget {
+  @override
+  _FoodDetailsPageState createState() => _FoodDetailsPageState();
+}
+
+class _FoodDetailsPageState extends State<FoodDetailsPage> {
   final List<String> foodItems = [
     "Bread (1 Pack)",
     "Milk (500 ML)",
@@ -16,6 +24,49 @@ class FoodDetailsPage extends StatelessWidget {
   ];
 
   final List<int> points = [100, 150, 200, 300];  // Points for each item
+  int userPoints = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchUserPoints();
+  }
+
+  Future<void> _fetchUserPoints() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      userPoints = prefs.getInt('userPoints') ?? 0;
+    });
+  }
+
+  Future<void> _updatePoints(int pointsSpent) async {
+    final userId = 1;  // Example user ID
+    final remainingPoints = userPoints - pointsSpent;
+
+    final url = Uri.parse('https://0f38-185-183-34-154.ngrok-free.app/api/admin/Add_Point__User?user_id=$userId&points=$remainingPoints');
+    final headers = {
+      'Content-Type': 'application/json',
+    };
+
+    try {
+      final response = await http.post(url, headers: headers);
+
+      if (response.statusCode == 200) {
+        setState(() {
+          userPoints = remainingPoints;
+        });
+
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setInt('userPoints', userPoints);
+      } else {
+        print('Failed to update points. Status code: ${response.statusCode}');
+        print('Response body: ${response.body}');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
   void _showConfirmationDialog(BuildContext context, String item, int points) {
     showDialog(
       context: context,
@@ -33,8 +84,8 @@ class FoodDetailsPage extends StatelessWidget {
             TextButton(
               child: Text('Confirm'),
               onPressed: () {
-                // Logic for confirming the selection could be here
                 Navigator.of(context).pop(); // Close the dialog
+                _updatePoints(points);
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                   content: Text('You have selected $item.'),
                   duration: Duration(seconds: 2),

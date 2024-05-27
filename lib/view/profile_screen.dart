@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart'; // Import SharedPreferences package
+import 'package:shared_preferences/shared_preferences.dart';
 import 'login_screen.dart';
 import 'redeem_points_page.dart';
 
 class ProfileScreen extends StatefulWidget {
-  final String city = "City Name"; // Example city name
-  final int points = 500; // Example points
-
   ProfileScreen({Key? key}) : super(key: key); // Remove the username parameter
 
   @override
@@ -19,17 +18,28 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   bool _isDarkModeEnabled = false; // Initial state of the switch
   String _storedUsername = ''; // Variable to store fetched username
+  int _userPoints = 0;
+  String _city = "Damascus";
 
   @override
   void initState() {
     super.initState();
     _fetchUsername(); // Fetch username when the widget initializes
+    _fetchUserPoints();
+    _determinePosition(); // Fetch city name based on geolocation
   }
 
   void _fetchUsername() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      _storedUsername = prefs.getString('username') ?? ''; // Retrieve username from shared preferences
+      _storedUsername = prefs.getString('username') ?? '';
+    });
+  }
+
+  void _fetchUserPoints() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _userPoints = prefs.getInt('userPoints') ?? 0; // Retrieve points from shared preferences
     });
   }
 
@@ -39,8 +49,53 @@ class _ProfileScreenState extends State<ProfileScreen> {
     });
   }
 
-  // Function to log out
-  // Function to log out
+  Future<void> _determinePosition() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    // Test if location services are enabled.
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+
+      return Future.error('Location services are disabled.');
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+
+        return Future.error('Location permissions are denied');
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      // Permissions are denied forever, handle appropriately.
+      return Future.error(
+          'Location permissions are permanently denied, we cannot request permissions.');
+    }
+
+    // When we reach here, permissions are granted and we can
+    // continue accessing the position of the device.
+    final position = await Geolocator.getCurrentPosition();
+    _getCityFromCoordinates(position);
+  }
+
+  Future<void> _getCityFromCoordinates(Position position) async {
+    try {
+      List<Placemark> placemarks = await placemarkFromCoordinates(position.latitude, position.longitude);
+      Placemark place = placemarks[0];
+      setState(() {
+        _city = place.locality ?? "Unknown City";
+      });
+    } catch (e) {
+      print(e);
+      setState(() {
+        _city = "Unknown City";
+      });
+    }
+  }
+
   // Function to log out
   void _logout() async {
     try {
@@ -115,12 +170,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     Row(
                       children: [
                         Text(
-                          widget.city,
+                          _city,
                           style: TextStyle(fontSize: 16, color: textColor),
                         ),
                         SizedBox(width: 8),
                         Text(
-                          '(${widget.points} points)',
+                          '($_userPoints points)',
                           style: TextStyle(fontSize: 16, color: textColor),
                         ),
                       ],
