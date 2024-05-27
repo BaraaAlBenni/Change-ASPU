@@ -105,7 +105,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
       if (token != null) {
         var response = await http.post(
-          Uri.parse('https://0f38-185-183-34-154.ngrok-free.app/api/logout'),
+          Uri.parse('https://298f-169-150-196-87.ngrok-free.app/api/logout'),
           headers: {
             'Authorization': 'Bearer $token', // Include token in the headers
           },

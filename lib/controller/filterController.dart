@@ -82,7 +82,7 @@ class FilterController extends GetxController {
   void fetchData() async {
     try {
       var http;
-      var response = await http.get(Uri.parse('https://7997-190-2-153-226.ngrok-free.app /api/categories_display'));
+      var response = await http.get(Uri.parse('https://298f-169-150-196-87.ngrok-free.app/api/categories_display'));
       if (response.statusCode == 200) {
         items.assignAll(json.decode(response.body));
       } else {

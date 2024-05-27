@@ -11,7 +11,7 @@ class LoginController extends GetxController {
 
   var rememberMe = false.obs;  // Define rememberMe as an observable
 
-  final String baseUrl = 'https://0f38-185-183-34-154.ngrok-free.app/api/login';
+  final String baseUrl = 'https://298f-169-150-196-87.ngrok-free.app/api/login';
 
   Future<void> login(String email, String password) async {
     isLoading.value = true;

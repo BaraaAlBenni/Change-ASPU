@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../view/login_screen.dart';
 import '../view/registration_screen.dart';
 
@@ -40,18 +39,14 @@ class ConfirmationDialog extends StatelessWidget {
           actions: <Widget>[
             TextButton(
               onPressed: () {
-                Navigator.of(context).pop(); // Dismiss the dialog
-                // Navigate to the RegistrationScreen for Volunteer
-                // Optionally, pass an argument if the RegistrationScreen needs to know the choice
+                Navigator.of(context).pop();
                 Get.to(() => RegistrationScreen(), arguments: {'role': 'Volunteer'});
               },
               child: Text('Volunteer'),
             ),
             TextButton(
               onPressed: () {
-                Navigator.of(context).pop(); // Dismiss the dialog
-                // Navigate to the RegistrationScreen for Company
-                // Optionally, pass an argument if the RegistrationScreen needs to know the choice
+                Navigator.of(context).pop();
                 Get.to(() => RegistrationScreen(), arguments: {'role': 'Company'});
               },
               child: Text('Company'),

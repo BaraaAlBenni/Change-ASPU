@@ -6,7 +6,7 @@ class FavoritesManager {
   static Future<void> addToFavorites(BuildContext context, int volunteerId) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = '21|VMj9znU3QEwmw0EvJPhC39gIh5CyvHMVwOkcwpsw58f34338'; // Hardcoded token
-    var url = Uri.parse('https://baa0-190-2-153-226.ngrok-free.app/api/add_to_favourite/$volunteerId');
+    var url = Uri.parse('https://0f38-185-183-34-154.ngrok-free.app/api/add_to_favourite/$volunteerId');
 
     try {
       // Store favorite locally

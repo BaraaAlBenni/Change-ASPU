@@ -1,11 +1,11 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io'; // Import the dart:io package
 import 'package:permission_handler/permission_handler.dart'; // Import permission handler
 import 'package:projecthalf/view/SearchScreen/SearchScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart'; // Import SharedPreferences
+import 'package:intl/intl.dart'; // Import intl for date formatting
 
 class NewCategoryScreen extends StatefulWidget {
   @override
@@ -16,6 +16,10 @@ class _NewCategoryScreenState extends State<NewCategoryScreen> {
   XFile? _imageFile;
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _titleController = TextEditingController(); // Add title controller
+  final TextEditingController _startDateController = TextEditingController();
+  final TextEditingController _endDateController = TextEditingController();
+  final TextEditingController _startHourController = TextEditingController();
+  final TextEditingController _endHourController = TextEditingController();
   final ImagePicker _picker = ImagePicker();
   String? _selectedCity;
   final List<String> _cities = ['Damascus', 'Sweida', 'Aleppo', 'Homs', 'Hama', 'Lattakia', 'Tartus', 'Daraa'];
@@ -77,6 +81,10 @@ class _NewCategoryScreenState extends State<NewCategoryScreen> {
       'imagePath': _imageFile!.path,
       'title': _titleController.text,
       'description': _descriptionController.text,
+      'startDate': _startDateController.text,
+      'endDate': _endDateController.text,
+      'startHour': _startHourController.text,
+      'endHour': _endHourController.text,
     };
 
     savedOpportunities.add(json.encode(newOpportunity));
@@ -94,6 +102,30 @@ class _NewCategoryScreenState extends State<NewCategoryScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> _selectDate(BuildContext context, TextEditingController controller) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2024),
+      lastDate: DateTime(2101),
+    );
+    if (picked != null && picked != DateTime.now())
+      setState(() {
+        controller.text = DateFormat('yyyy-MM-dd').format(picked);
+      });
+  }
+
+  Future<void> _selectTime(BuildContext context, TextEditingController controller) async {
+    final TimeOfDay? picked = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+    );
+    if (picked != null)
+      setState(() {
+        controller.text = picked.format(context);
+      });
   }
 
   @override
@@ -127,20 +159,28 @@ class _NewCategoryScreenState extends State<NewCategoryScreen> {
                 ),
               ),
               SizedBox(height: 20),
-              DropdownButton<String>(
-                hint: Text("Select a city"),
-                value: _selectedCity,
-                items: _cities.map((String city) {
-                  return DropdownMenuItem<String>(
-                    value: city,
-                    child: Text(city),
-                  );
-                }).toList(),
-                onChanged: (String? newValue) {
-                  setState(() {
-                    _selectedCity = newValue;
-                  });
-                },
+              Row(
+                children: [
+                  Expanded(
+                    child: Center(
+                      child: DropdownButton<String>(
+                        hint: Text("Select a city"),
+                        value: _selectedCity,
+                        items: _cities.map((String city) {
+                          return DropdownMenuItem<String>(
+                            value: city,
+                            child: Text(city),
+                          );
+                        }).toList(),
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            _selectedCity = newValue;
+                          });
+                        },
+                      ),
+                    ),
+                  ),
+                ],
               ),
               SizedBox(height: 20),
               TextField(
@@ -159,6 +199,46 @@ class _NewCategoryScreenState extends State<NewCategoryScreen> {
                   labelText: 'Description',
                 ),
                 maxLines: 5,
+              ),
+              SizedBox(height: 20),
+              TextField(
+                controller: _startDateController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Start Date',
+                ),
+                readOnly: true,
+                onTap: () => _selectDate(context, _startDateController),
+              ),
+              SizedBox(height: 20),
+              TextField(
+                controller: _endDateController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'End Date',
+                ),
+                readOnly: true,
+                onTap: () => _selectDate(context, _endDateController),
+              ),
+              SizedBox(height: 20),
+              TextField(
+                controller: _startHourController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Start Hour',
+                ),
+                readOnly: true,
+                onTap: () => _selectTime(context, _startHourController),
+              ),
+              SizedBox(height: 20),
+              TextField(
+                controller: _endHourController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'End Hour',
+                ),
+                readOnly: true,
+                onTap: () => _selectTime(context, _endHourController),
               ),
               SizedBox(height: 20),
               ElevatedButton(

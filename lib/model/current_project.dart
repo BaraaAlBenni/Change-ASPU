@@ -1,4 +1,3 @@
-// lib/models/current_project.dart
 
 class CurrentProject {
   final String title;
