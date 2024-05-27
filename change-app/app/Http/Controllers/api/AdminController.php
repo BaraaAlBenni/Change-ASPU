@@ -68,21 +68,12 @@ class AdminController extends Controller
             $query->where('start_date', '>=', $startDate);
         } elseif ($endDate) {
             $query->where('start_date', '<=', $endDate);
-            /**
-             * {
-             *      'start_date'=>"2024-5-7"
-             *      'endDate'=>"2026-5-7"
-             * }
-             */
+
         } elseif ($userType) {
             $query->whereHas('User', function ($query) use ($userType) {
                 $query->where('type_user', $userType);
             })->where('user_id', auth()->id());
-            /**
-             * {
-             *      'user_id' => '0'
-             * }
-             */
+
         } elseif ($address) {
 
             $query->where('address', 'like', '%' . $address . '%');
